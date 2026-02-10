@@ -1,1 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>Dogcat – اضحك</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">Dogcat</div>
+  <div class="links">
+    <a href="#">صفحتك</a>
+    <a href="#">اشتراك</a>
+    <a href="#">تواصل</a>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+  <div class="card" id="card">
+    <h2>اضحك 😂</h2>
+
+    <input id="textInput" placeholder="اكتب أي جملة">
+
+    <div class="buttons">
+      <button id="btn">نتيجة</button>
+      <button id="laughBtn">😂 ضحكت</button>
+    </div>
+
+    <button id="voiceToggle">🔊 الصوت شغال</button>
+
+    <div id="result"></div>
+
+    <div id="laughCounter">
+      عدد الضحكات: <span id="count">0</span>
+    </div>
+
+    <div id="topLaughers">
+      🏆 أعلى ضحك: <span id="top">0</span>
+    </div>
+
+    <button id="resetBtn">🔄 تصفير العداد</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  Made by ® Sameh Elnady
+</footer>
+
+<!-- Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script src="script.js"></script>
+</body>
+      </html>
