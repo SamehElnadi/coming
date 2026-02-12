@@ -1,84 +1,20 @@
+/* ===== عام ===== */
 body{
   margin:0;
   font-family: 'Amiri', serif;
   background:#0f0f0f;
   color:#fff;
   display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+
+.main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  min-height:100vh;
-}
-
-.card{
-  width:350px;
-  padding:25px;
-  border-radius:25px;
-  text-align:center;
-  background:#1b1b1b;
-  box-shadow:0 0 40px rgba(255,215,0,.3);
-  transition:.3s;
-}
-
-input{
-  width:100%;
-  margin-top:15px;
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  font-size:15px;
-}
-button{
-  padding:10px 20px;
-  border:none;
-  border-radius:20px;
-  margin-top:10px;
-  cursor:pointer;
-}
-
-.result{
-  margin-top:10px;
-  font-size:18px;
-  min-height:60px;
-  color:#FFD700;
-  font-weight:bold;
-}
-
-/* قائمة كروت الآيات */
-.verse-list{
-  margin-top:10px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-.verse-item{
-  background: #fdf6e3;
-  border: 3px solid;
-  border-image: url('images/islamic-border.png') 30 round;
-  border-radius: 25px;
-  padding: 15px 20px;
-  color: #333;
-  font-size: 18px;
-  font-family: 'Amiri', serif;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.25s, font-size 0.25s, box-shadow 0.25s, background 0.25s;
-}
-.verse-item:hover{
-  background:#eee;
-}
-.verse-item.expanded{
-  transform: scale(1.1);
-  font-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0f0f0f;
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
 }
 
 /* ===== Navbar ثابت أعلى ===== */
@@ -97,62 +33,32 @@ button{
 }
 
 .quran-btn {
-  color: #fff;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 12px 30px;
+  padding: 12px 25px;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background-color: #2e7d32; /* أخضر أغمق عند الضغط */
-  transition: all 0.3s;
-}
-
-/* عند الضغط على الزر */
-.quran-btn:active {
-  transform: scale(0.95);
-  background-color: #1b5e20;
-}
-
-/* ===== Popup تحميل التطبيق ===== */
-.popup {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,0,0,0.6);
-  z-index: 9998;
-  display: none; /* مخفي افتراضي */
-}
-
-.popupCard {
-  background: #222;
+  border-radius: 10px;
+  background-color: #4CAF50; /* أخضر */
   color: #fff;
-  padding: 25px 40px;
-  border-radius: 15px;
   font-size: 18px;
-  text-align: center;
-  box-shadow: 0 0 20px gold;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s, background 0.3s;
+  min-width: 140px;
+  position: relative;
+}
+.quran-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3) inset;
+}
+.quran-btn.counting .btn-text {
+  display: none;
+}
+.quran-btn.counting .btn-count {
+  display: inline-block;
+  font-family: monospace;
+  color: #fff;
 }
 
-.navbar a{
-  color:#fff;
-  text-decoration:none;
-  margin-left:15px;
-  opacity:.8;
-}
-.navbar a:hover{opacity:1}
-
-/* Main */
-.main{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-
+/* ===== البطاقة الرئيسية ===== */
 .card{
   width:320px;
   padding:30px;
@@ -162,7 +68,6 @@ button{
   box-shadow:0 0 40px rgba(255,215,0,.35);
   transition:transform .25s, box-shadow .25s;
 }
-
 .card:hover{
   transform:scale(1.04);
   box-shadow:0 0 60px rgba(255,215,0,.6);
@@ -187,12 +92,12 @@ button{
   cursor:pointer;
   background:linear-gradient(45deg,gold,orange);
 }
-
 button:disabled{
   opacity:.5;
   cursor:not-allowed;
 }
 
+/* ===== عرض النتائج ===== */
 .result{
   margin-top:20px;
   font-size:18px;
@@ -201,258 +106,34 @@ button:disabled{
   font-weight:bold;
 }
 
-/* Shake */
-@keyframes shake{
-  0%{transform:translateX(0)}
-  25%{transform:translateX(-4px)}
-  50%{transform:translateX(4px)}
-  75%{transform:translateX(-4px)}
-  100%{transform:translateX(0)}
-}
-.shake{
-  animation:shake .3s;
-}
-
-/* أزرار التسبيح */
-.tasbeeh-buttons{
-  display:flex;
-  justify-content:space-between;
-  margin-top:15px;
-}
-.tasbeeh-block{
+/* ===== قائمة كروت الآيات ===== */
+.verse-list{
+  margin-top:10px;
   display:flex;
   flex-direction:column;
-  align-items:center;
-  width:30%;
-}
-.tasbeeh-btn{
-  width:100%;
-  padding:15px;
-  border-radius:12px;
-  font-weight:bold;
-  background:linear-gradient(45deg,gold,orange);
-}
-.sub-counter{
-  margin-top:5px;
-  font-size:14px;
-  color:yellow;
-}
-
-/* العدادات الرئيسية */
-.counters{
-  font-size:18px;
-  margin:15px 0;
-}
-.counter-box{
-  display:inline-block;
-  width:40px;
-  height:40px;
-  line-height:40px;
-  text-align:center;
-  margin:2px;
-  font-size:18px;
-  font-weight:bold;
-  color:#fff;
-  background:#4CAF50;
-  border-radius:6px;
-}
-
-/* Slider */
-.slider{
-  width:320px;
-  display:flex;
-  overflow-x:auto;
   gap:10px;
-  margin-bottom:15px;
-  scroll-snap-type:x mandatory;
-  scrollbar-width:none;
 }
-.slider::-webkit-scrollbar{display:none;}
-.slider img{
-  width:100%;
-  border-radius:14px;
-  scroll-snap-align:start;
-  flex:0 0 100%;
-  transition: transform 0.2s, box-shadow 0.2s;
+.verse-item{
+  background: #fdf6e3;
+  border: 3px solid;
+  border-image: url('https://i.ibb.co/5r9Vx0k/islamic-border.png') 30 round;
+  border-radius: 25px;
+  padding: 15px 20px;
+  color: #333;
+  font-size: 18px;
+  font-family: 'Amiri', serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.25s, font-size 0.25s, box-shadow 0.25s, background 0.25s;
 }
-.slider img:active{
-  transform: scale(1.05);
-  box-shadow:0 0 15px #FFD700;
+.verse-item:hover{
+  background:#eee;
 }
-
-/* Popup 99 */
-.popup{
-  position:fixed;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  background:rgba(0,0,0,.6);
-}
-.popupCard{
-  background:#222;
-  padding:30px;
-  border-radius:20px;
-  font-size:18px;
-  text-align:center;
-}
-
-/* Footer */
-.site-footer{
-  padding:15px;
-  text-align:center;
-  font-size:13px;
-  color:#aaa;
-  opacity:.8;
-}body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0f0f0f;
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-}
-
-.navbar{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:15px 20px;
-  background:#111;
-  box-shadow:0 2px 10px #000;
-}
-
-.main{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-
-.card{
-  width:320px;
-  padding:30px;
-  border-radius:22px;
-  text-align:center;
-  background:#1a1a1a;
-  box-shadow:0 0 40px rgba(255,215,0,.35);
-  transition:transform .25s, box-shadow .25s;
-}
-
-input{
-  width:100%;
-  margin-top:15px;
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  font-size:15px;
-}
-
-button{
-  margin-top:15px;
-  padding:12px 30px;
-  border:none;
-  border-radius:30px;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-  background:linear-gradient(45deg,gold,orange);
-}
-
-button:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-.result{
-  margin-top:20px;
-  font-size:18px;
-  min-height:40px;
-  color:#FFD700;
-  font-weight:bold;
-}
-
-.tasbeeh-buttons{
-  display:flex;
-  justify-content:space-between;
-  margin-top:15px;
-}
-.tasbeeh-block{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  width:30%;
-}
-.tasbeeh-btn{
-  width:100%;
-  padding:15px;
-  border-radius:12px;
-  font-weight:bold;
-}
-.sub-counter{
-  margin-top:5px;
-  font-size:14px;
-  color:yellow;
-}
-
-.counters{
-  font-size:18px;
-  margin:15px 0;
-}
-.counter-box{
-  display:inline-block;
-  width:40px;
-  height:40px;
-  line-height:40px;
-  text-align:center;
-  margin:2px;
-  font-size:18px;
-  font-weight:bold;
-  color:#fff;
-  background:#4CAF50;
-  border-radius:6px;
-}
-
-.slider{
-  width:320px;
-  display:flex;
-  overflow-x:auto;
-  gap:10px;
-  margin-bottom:15px;
-  scroll-snap-type:x mandatory;
-  scrollbar-width:none;
-}
-.slider::-webkit-scrollbar{display:none;}
-.slider img{
-  width:100%;
-  border-radius:14px;
-  scroll-snap-align:start;
-  flex:0 0 100%;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.slider img:active{
-  transform: scale(1.05);
-  box-shadow:0 0 15px #FFD700;
-}
-
-.popup{
-  position:fixed;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  background:rgba(0,0,0,.6);
-}
-.popupCard{
-  background:#222;
-  padding:30px;
-  border-radius:20px;
-  font-size:18px;
-  text-align:center;
-}size: 20px;
-  box-shadow: 0 0 20px gold;
+.verse-item.expanded{
+  transform: scale(1.1);
 }
 .verse-item button{
   display: none;
@@ -466,7 +147,7 @@ button:disabled{
   display: inline-block;
 }
 
-/* أزرار التسبيح الثلاثة */
+/* ===== أزرار التسبيح الثلاثة ===== */
 .tasbeeh-buttons{
   display:flex;
   justify-content:space-between;
@@ -491,7 +172,7 @@ button:disabled{
   color:yellow;
 }
 
-/* العدادات الرئيسية */
+/* ===== العدادات الرئيسية ===== */
 .counters{
   font-size:18px;
   margin:15px 0;
@@ -510,7 +191,7 @@ button:disabled{
   border-radius:6px;
 }
 
-/* Slider */
+/* ===== Slider الصور ===== */
 .slider{
   width:350px;
   display:flex;
@@ -533,7 +214,7 @@ button:disabled{
   box-shadow:0 0 15px #FFD700;
 }
 
-/* نافذة 99 */
+/* ===== Popup 99 ===== */
 .popup{
   position:fixed;
   inset:0;
@@ -541,6 +222,7 @@ button:disabled{
   justify-content:center;
   align-items:center;
   background:rgba(0,0,0,.6);
+  z-index:9998;
 }
 .popupCard{
   background:#222;
@@ -548,35 +230,26 @@ button:disabled{
   border-radius:20px;
   font-size:18px;
   text-align:center;
-}
-/* زر القرآن */
-.quran-btn {
-  padding: 12px 25px;
-  border: none;
-  border-radius: 10px;
-  background-color: #4CAF50; /* أخضر */
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s, background 0.3s;
-  min-width: 140px;
-  position: relative;
+  box-shadow: 0 0 20px gold;
 }
 
-/* تأثير الضغط */zz
-.quran-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3) inset;
+/* ===== Footer ===== */
+.site-footer{
+  padding:15px;
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+  opacity:.8;
 }
 
-/* النص الأبيض أثناء العد */
-.quran-btn.counting .btn-text {
-  display: none;
+/* ===== Shake Animation ===== */
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  50%{transform:translateX(4px)}
+  75%{transform:translateX(-4px)}
+  100%{transform:translateX(0)}
 }
-
-.quran-btn.counting .btn-count {
-  display: inline-block;
-  font-family: monospace;
-  color: #fff;
-}
+.shake{
+  animation:shake .3s;
+  }
