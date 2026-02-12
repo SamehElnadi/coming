@@ -1,208 +1,179 @@
-/* ====== الأصوات ====== */
-const clickSound = new Howl({
-  src: ['https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'],
-  volume: 0.6
-});
-
-const popSound = new Howl({
-  src: ['https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3'],
-  volume: 0.6
-});
-
-const laughs = [
-  new Howl({ src:['https://assets.mixkit.co/active_storage/sfx/427/427-preview.mp3'], volume:0.8 }),
-  new Howl({ src:['https://assets.mixkit.co/active_storage/sfx/466/466-preview.mp3'], volume:0.8 }),
-  new Howl({ src:['https://assets.mixkit.co/active_storage/sfx/439/439-preview.mp3'], volume:0.8 })
+/* ===== الأصوات ===== */
+const tasbeehSounds = [
+  new Howl({ src:['sounds/سبحان_الله.wav'], volume:0.8 }),
+  new Howl({ src:['sounds/الحمد_لله.wav'], volume:0.8 }),
+  new Howl({ src:['sounds/الله_أكبر.wav'], volume:0.8 })
 ];
+
+const alert99Sound = new Howl({ src:['sounds/tick.wav'], volume:0.8 });
 
 let voiceEnabled = true;
-const replies = [
-"😂 ضحكتني بجد",
-"🤣 دماغك دي محتاجة صيانة",
-"😆 التفكير ده خطر",
-"😂 لا لا كده كتير",
-"🤣 إنت جاي تهزر رسمي",
-"😜 الكلام ده كبير",
-"😅 بسيطة يا نجم",
-"😂 جت معاك",
-"🤣 ضربة معلم",
-"😆 إحساس عالي",
 
-"😂 واضح إنك فايق",
-"🤣 دماغ شقية",
-"😜 ثقة زيادة",
-"😆 خلصانة",
-"😂 حاول تاني",
-"🤣 ضحك رسمي",
-"😅 كمل",
-"😂 إنت كده تمام",
-"😆 دماغك سبقانا",
-"🤣 جامدة",
-
-"😂 لا تعليق",
-"😜 خطر على المجتمع",
-"🤣 عبقري بس غلط",
-"😆 ماشي الحال",
-"😂 دماغك قالت سلام"
-,
-"🤣 إبداع غير متوقع",
-"😂 التفكير ده محتاج فلتر",
-"😆 لا لا استنى",
-"🤣 ضحك من القلب",
-"😜 انت كده بتهزر",
-"😂 دي جت فجأة",
-"😅 عادي بتحصل",
-"🤣 إحنا بنضحك اهو",
-"😆 تمام كمل",
-"😂 مخك سابقك",
-
-"🤣 جامد اوي",
-"😜 الكلام ده خطر",
-"😂 إيه ده",
-"😆 مش بطالة",
-"🤣 رسمي",
-"😅 حاول تظبطها",
-"😂 لا لا",
-"😜 دماغ عالية",
-"🤣 ضحكني",
-"😆 استمر",
-
-"😂 ضربة حظ",
-"🤣 مش متوقعة",
-"😜 تمام يا كبير",
-"😆 سهلة",
-"😂 عبث جميل"
-,
-"🤣 دماغ مبدعة",
-"😂 هزار تقيل",
-"😆 مش بطال",
-"😜 انت خطر",
-"🤣 استنى بس",
-"😂 كلام كبير",
-"😅 عدت",
-"🤣 حلوة",
-"😆 لا بأس",
-"😂 دماغك غريبة",
-
-"🤣 جابت معاك",
-"😜 هزار عالي",
-"😂 شغل مخك",
-"😆 تمام كده",
-"🤣 ضحك بسيط",
-"😅 عادي",
-"😂 فلتت",
-"😜 سابق الزمن",
-"🤣 دماغ فريدة",
-"😆 تمام",
-
-"😂 مقبولة",
-"🤣 جامدة شوية",
-"😜 تفكيرك مجنون",
-"😆 نكمل",
-"😂 خلاص"
-,
-"🤣 دي حلوة",
-"😂 لا مؤاخذة",
-"😆 استمر",
-"😜 برافو",
-"🤣 ضحكني",
-"😂 تمام عليك",
-"😅 سهلة",
-"🤣 دماغك ناشفة",
-"😆 ماشي",
-"😂 تمام",
-
-"🤣 كلام موزون",
-"😜 عجباني",
-"😂 فكرة مجنونة",
-"😆 حلوة",
-"🤣 نضحك شوية",
-"😅 كمل",
-"😂 تمام قوي",
-"😜 مش طبيعي",
-"🤣 خلصانة",
-"😆 جامدة"
-];
-/* ====== العناصر ====== */
-const btn = document.getElementById("btn");
-const input = document.getElementById("textInput");
-const result = document.getElementById("result");
-const card = document.getElementById("card");
-
-const laughBtn = document.getElementById("laughBtn");
-const countSpan = document.getElementById("count");
-const topSpan = document.getElementById("top");
-const resetBtn = document.getElementById("resetBtn");
+/* ===== العناصر ===== */
+const sessionSpan = document.getElementById("sessionCount");
+const totalSpan = document.getElementById("totalCount");
+const resetTotal = document.getElementById("resetTotal");
+const popup = document.getElementById("popup");
 const voiceToggle = document.getElementById("voiceToggle");
 
-/* ====== الصوت ====== */
+const btn = document.getElementById("btn");
+const input = document.getElementById("textInput");
+const resultDiv = document.getElementById("result");
+const verseListDiv = document.getElementById("verseList");
+
+const tasbeehBtns = document.querySelectorAll(".tasbeeh-btn");
+const subCounters = [
+  document.getElementById("subCount0"),
+  document.getElementById("subCount1"),
+  document.getElementById("subCount2")
+];
+/* ===== جدول الكلمات والآيات النهائي ===== */
+const quranTable = [
+  // كلمات عامة
+  { keyword: "العبادات", verses: [
+    { verse: "الصيام، قيام، تراويح، تهجد، قرآن، دعاء، ليلة القدر، اعتكاف، طاعات، حسنات، مغفرة، عتق من النار", audio: null }
+  ]},
+  { keyword: "الروحانيات", verses: [
+    { verse: "ذكر الله، صلاة، تهجد، صيام، دعاء، تقرب لله بالروحانيات", audio: null }
+  ]},
+
+  // الوقت والزمان
+  { keyword: "هلال", verses: [ { verse: "رؤية الهلال علامة بداية الشهر", audio: null } ] },
+  { keyword: "غروب", verses: [ { verse: "وقت المغرب عند الغروب", audio: null } ] },
+  { keyword: "شروق", verses: [ { verse: "وقت الفجر عند الشروق", audio: null } ] },
+  { keyword: "سحور", verses: [ { verse: "وجبة السحور قبل الفجر", audio: null } ] },
+  { keyword: "إفطار", verses: [ { verse: "الإفطار عند غروب الشمس", audio: nullر الاجتماعية والثقافية
+  { keyword: "فانوس", verses: [ { verse: "زينة رمضان، فانوس مضيء", audio: null } ] },
+  { keyword: "رمضان كريم", verses: [ { verse: "رمضان كريم", audio: null } ] },
+  { keyword: "مبارك عليكم الشهر", verses: [ { verse: "مبارك عليكم الشهر", audio: null } ] },
+
+  // المأكولات والمشروبات
+  { keyword: "تمر", verses: [ { verse: "التمر من مأكولات رمضان", audio: null } ] },
+  { keyword: "قطايف", verses: [ { verse: "القطايف حلوى رمضانية", audio: null } ] },
+  { keyword: "كنافة", verses: [ { verse: "الكنافة مشهورة في رمضان", audio: null } ] },
+
+  // جمل تحية
+  { keyword: "كل عام وأنتم بخير", verses: [ { verse: "كل عام وأنتم بخير", audio: null } ] },
+  { keyword: "أعاده الله عليكم بالخير والبركات", verses: [ { verse: "أعاده الله عليكم بالخير والبركات", audio: null } ] },
+
+  // آيات الصيام
+  { keyword: "شهر رمضان", verses: [
+    { verse: "﴿شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ هُدًى لِّلنَّاسِ وَبَيِّنَاتٍ مِّنَ الْهُدَىٰ وَالْفُرْقَانِ ۚ فَمَن شَهِدَ مِنكُمُ الشَّهْرَ فَلْيَصُمْهُ ۖ وَمَن كَانَ مَرِيضًا أَوْ عَلَىٰ سَفَرٍ فَعِدَّةٌ مِّنْ أَيَّامٍ أُخَرَ ۗ يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ وَلِتُكْمِلُوا الْعِدَّةَ وَلِتُكَبِّرُوا اللَّهَ عَلَىٰ مَا هَدَاكُمْ وَلَعَلَّكُمْ تَشْكُرُونَ﴾ [البقرة: 185]", audio: null }
+  ]},
+  { keyword: "فرضية الصيام", verses: [
+    { verse: "﴿يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ﴾ [البقرة: 183]", audio: null }
+  ]},
+  { keyword: "أحكام الصيام", verses: [
+    { verse: "﴿أَيَّامًا مَّعْدُودَاتٍ ۚ فَمَن كَانَ مِنكُم مَّرِيضًا أَوْ عَلَىٰ سَفَرٍ فَعِدَّةٌ مِّنْ أَيَّامٍ أُخَرَ ۚ وَعَلَى الَّذِينَ يُطِيقُونَهُ فِدْيَةٌ طَعَامُ مِسْكِينٍ ۖ فَمَن تَطَوَّعَ خَيْرًا فَهُوَ خَيْرٌ لَّهُ ۚ وَأَن تَصُومُوا خَيْرٌ لَّكُمْ ۖ إِن كُنتُمْ تَعْلَمُونَ﴾ [البقرة: 184]", audio: null }
+  ]},
+
+  // آيات متنوعة للتقرب والذكر
+  { keyword: "قرب", verses: [
+    { verse: "{وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ} [البقرة: 186]", audio: null },
+    { verse: "{إِنَّ رَحْمَتَ اللَّهِ قَرِيبٌ مِّنَ الْمُحْسِنِينَ} [الأعراف: 56]", audio: null },
+    { verse: "{قُلْ إِن كُنتُمْ تُحِبُّونَ اللَّهَ فَاتَّبِعُونِي يُحْبِبْكُمُ اللَّهُ وَيَغْفِرْ لَكُمْ ذُنُوبَكُمْ} [آل عمران: 31]", audio: null },
+    { verse: "{إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ} [الحجرات: 13]", audio: null },
+    { verse: "{وَاسْجُدْ وَاقْتَرِب} [العلق: 19]", audio: null },
+    { verse: "{واذكر ربك في نفسك تضرعا وخيفة} [الأعراف: 205]", audio: null },
+    { verse: "{إِنَّ اللَّهَ يُحِبُّ التَّوَّابِينَ وَيُحِبُّ الْمُتَطَهِّرِينَ} [البقرة: 222]", audio: null },
+    { verse: "{وَمَا أَمْوَالُكُمْ وَلَا أَوْلَادُكُم بِالَّتِي تُقَرِّبُكُمْ عِندَنَا زُلْفَىٰ إِلَّا مَنْ آمَنَ وَعَمِلَ صَالِحًا} [سبأ: 37]", audio: null },
+    { verse: "{تَتَجَافَىٰ جُنُوبُهُمْ عَنِ الْمَضَاجِعِ يَدْعُونَ رَبَّهُمْ خَوْفًا وَطَمَعًا} [السجدة: 16]", audio: null }
+  ]}
+];
+/* ===== العدادات ===== */
+let sessionCount = 0;
+let totalCount = Number(localStorage.getItem("totalCount")) || 0;
+
+function updateCounter(n, container){
+  container.innerHTML = "";
+  const digits = n.toString().split('');
+  digits.forEach(d => {
+    const box = document.createElement("span");
+    box.className = "counter-box";
+    box.innerText = d;
+    container.appendChild(box);
+  });
+}
+updateCounter(sessionCount, sessionSpan);
+updateCounter(totalCount, totalSpan);
+
+/* ===== أزرار التسبيح ===== */
+tasbeehBtns.forEach((btn,index)=>{
+  let subCount = 0;
+  btn.onclick = () => {
+    subCount++;
+    subCounters[index].innerText = subCount;
+
+    if(voiceEnabled){
+      tasbeehSounds[index].play();
+    }
+
+    sessionCount++;
+    totalCount++;
+    updateCounter(sessionCount, sessionSpan);
+    updateCounter(totalCount, totalSpan);
+    localStorage.setItem("totalCount", totalCount);
+
+    if(sessionCount === 99){
+      popup.style.display = "flex";
+      if(voiceEnabled) alert99Sound.play();
+      setTimeout(()=>{
+        popup.style.display = "none";
+        sessionCount = 0;
+        updateCounter(sessionCount, sessionSpan);
+      },2000);
+    }
+  };
+});
+
+/* ===== مسح العداد الدائم ===== */
+resetTotal.onclick = () => {
+  totalCount = 0;
+  localStorage.setItem("totalCount",0);
+  updateCounter(totalCount, totalSpan);
+};
+
+/* ===== تشغيل / إيقاف الصوت ===== */
 voiceToggle.onclick = () => {
   voiceEnabled = !voiceEnabled;
   voiceToggle.innerText = voiceEnabled ? "🔊 الصوت شغال" : "🔇 الصوت مقفول";
 };
 
-function speak(text){
-  if(!voiceEnabled || !("speechSynthesis" in window)) return;
-  const msg = new SpeechSynthesisUtterance(text);
-  msg.lang = "ar-EG";
-  speechSynthesis.cancel();
-  speechSynthesis.speak(msg);
-}
-
-/* ====== العداد ====== */
-let laughCount = Number(localStorage.getItem("laughCount")) || 0;
-let topLaugh = Number(localStorage.getItem("topLaugh")) || 0;
-
-countSpan.innerText = laughCount;
-topSpan.innerText = topLaugh;
-
-laughBtn.onclick = () => {
-  laughCount++;
-  localStorage.setItem("laughCount", laughCount);
-  countSpan.innerText = laughCount;
-
-  if(laughCount > topLaugh){
-    topLaugh = laughCount;
-    localStorage.setItem("topLaugh", topLaugh);
-    topSpan.innerText = topLaugh;
-  }
-
-  if(voiceEnabled){
-    laughs[Math.floor(Math.random()*laughs.length)].play();
-  }
-};
-
-resetBtn.onclick = () => {
-  laughCount = 0;
-  localStorage.setItem("laughCount", 0);
-  countSpan.innerText = 0;
-};
+/* ===== عرض الآيات ===== */
 btn.onclick = () => {
-  if(input.value.trim() === "") return;
+  const val = input.value.trim().toLowerCase();
+  if(val === "") return;
 
-  btn.disabled = true;
-  clickSound.play();
+  // البحث بدون حساسية لحالة الأحرف
+  const found = quranTable.find(x => val.includes(x.keyword.toLowerCase()));
+  verseListDiv.innerHTML = "";
+  resultDiv.innerText = "";
 
-  input.value = "";
+  if(found){
+    found.verses.forEach((v,i)=>{
+      // عرض الكارت الكبير (الآية الأولى)
+      if(i === 0) resultDiv.innerText = v.verse;
 
-  const r = replies[Math.floor(Math.random() * replies.length)];
-  result.innerText = r;
+      // كارت الآية في القائمة
+      const div = document.createElement("div");
+      div.className = "verse-item";
+      div.innerHTML = `<span>${v.verse}</span> <button>🔊</button>`;
+      const btnAudio = div.querySelector("button");
 
-  if(voiceEnabled){
-    popSound.play();
-    speak(r);
+      btnAudio.onclick = (e)=>{
+        e.stopPropagation();
+        if(voiceEnabled && v.audio){
+          new Howl({ src:[v.audio], volume:0.8 }).play();
+        }
+      };
+
+      div.onclick = ()=>{
+        resultDiv.innerText = v.verse;
+        div.classList.toggle("expanded");
+      };
+      verseListDiv.appendChild(div);
+    });
+  } else {
+    resultDiv.innerText = "لا يوجد نتيجة";
   }
-
-  confetti({
-    particleCount: 90,
-    spread: 80,
-    origin: { y: 0.6 }
-  });
-
-  card.classList.add("shake");
-
-  setTimeout(() => {
-    btn.disabled = false;
-    card.classList.remove("shake");
-  }, 1000);
 };
