@@ -1,61 +1,91 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>Dogcat – اضحك</title>
+<!-- Navbar جديد -->
+<div class="navbar">
+  <div class="logo">
+    <button id="quranBtn" class="quran-btn">قرآن كريم</button>
+  </div>
+</div>
+
+  <title>جدول ديناميكي للآيات</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- Navbar -->
-<div class="navbar">
-  <div class="logo">Dogcat</div>
-  <div class="links">
-    <a href="#">صفحتك</a>
-    <a href="#">اشتراك</a>
-    <a href="#">تواصل</a>
-  </div>
-</div>
-
-<!-- Main -->
 <div class="main">
+
+  <!-- Slider -->
+  <div class="slider" id="slider">
+    <img src="images/pic1.jpg">
+    <img src="images/pic2.jpg">
+    <img src="https://picsum.photos/400/200?3">
+  </div>
+
   <div class="card" id="card">
-    <h2>اضحك 😂</h2>
-
-    <input id="textInput" placeholder="اكتب أي جملة">
-
+    <!-- إدخال الكلمات -->
+    <input id="textInput" placeholder="اكتب أي كلمة">
     <div class="buttons">
-      <button id="btn">نتيجة</button>
-      <button id="laughBtn">😂 ضحكت</button>
+      <button id="btn">عرض النتائج</button>
     </div>
 
+    <!-- كارت الآية الكبيرة -->
+    <div id="result" class="result"></div>
+
+    <!-- قائمة كروت الآيات -->
+    <div id="verseList" class="verse-list"></div>
+
+    <!-- أزرار التسبيح الثلاثة -->
+    <div class="tasbeeh-buttons">
+      <div class="tasbeeh-block">
+        <button class="tasbeeh-btn" data-index="0">سبحان الله</button>
+        <div class="sub-counter" id="subCount0">0</div>
+      </div>
+      <div class="tasbeeh-block">
+        <button class="tasbeeh-btn" data-index="1">الحمد لله</button>
+        <div class="sub-counter" id="subCount1">0</div>
+      </div>
+ z     <div class="tasbeeh-block">
+        <button class="tasbeeh-btn" data-index="2">الله أكبر</button>
+        <div class="sub-counter" id="subCount2">0</div>
+      </div>
+    </div>
+
+    <!-- العدادات الرئيسية -->
+    <div class="counters">
+      <p>عداد الجلسة : <span id="sessionCount"></span></p>
+      <p>عداد دائم : <span id="totalCount"></span></p>
+    </div>
+
+    <!-- أزرار التحكم -->
+    <button id="resetTotal">🗑 مسح العداد الدائم</button>
     <button id="voiceToggle">🔊 الصوت شغال</button>
 
-    <div id="result"></div>
-
-    <div id="laughCounter">
-      عدد الضحكات: <span id="count">0</span>
-    </div>
-
-    <div id="topLaughers">
-      🏆 أعلى ضحك: <span id="top">0</span>
-    </div>
-
-    <button id="resetBtn">🔄 تصفير العداد</button>
   </div>
 </div>
 
-<!-- Footer -->
-<footer class="site-footer">
-  Made by ® Sameh Elnady
-</footer>
+<!-- نافذة 99 -->
+<div id="popup" class="popup">
+  <div class="popupCard">
+    🌿 تم إنهاء 99 تسبيحة<br>
+    تم تصفير عداد الجلسة
+  </div>
+</div>
+<!-- Navbar ثابت أعلى + زر قرآن كريم -->
+<div class="navbar">
+  <button id="quranBtn" class="quran-btn">قرآن كريم</button>
+</div>
 
-<!-- Libraries -->
+<!-- Popup تحميل التطبيق -->
+<div id="appPopup" class="popup">
+  <div class="popupCard">
+    🔄 جاري تحميل التطبيق...
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <script src="script.js"></script>
 </body>
-      </html>
+  </html>
